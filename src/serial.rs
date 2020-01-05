@@ -2,16 +2,14 @@ use core::fmt;
 use core::marker::PhantomData;
 use core::ptr;
 
-use crate::gpio::gpioa::*;
 use crate::gpio::AltMode;
 use crate::hal;
 use crate::hal::prelude::*;
-pub use crate::pac::USART2;
 use crate::rcc::Rcc;
 use nb::block;
 
-#[cfg(feature = "stm32l0x1")]
-pub use crate::pac::LPUART1;
+pub use crate::gpio::{gpioa::*, gpiob::*, gpioc::*, gpiod::*};
+pub use crate::pac::{LPUART1, USART1, USART2, USART4, USART5};
 
 #[cfg(any(feature = "stm32l0x2", feature = "stm32l0x3"))]
 use core::{
@@ -25,11 +23,7 @@ use as_slice::{AsMutSlice, AsSlice};
 #[cfg(any(feature = "stm32l0x2", feature = "stm32l0x3"))]
 pub use crate::{
     dma,
-    gpio::gpiob::*,
-    gpio::gpioc::*,
-    gpio::gpiod::*,
-    gpio::gpioe::*, 
-    pac::{LPUART1, USART1, USART4, USART5},
+    gpioe::*,
 };
 
 #[cfg(any(feature = "stm32l0x2", feature = "stm32l0x3"))]
@@ -163,8 +157,21 @@ macro_rules! impl_pins {
 
 #[cfg(feature = "stm32l0x1")]
 impl_pins!(
-    LPUART1, PA2, PA3,  AF6;
-    USART2,  PA9, PA10, AF4;
+    LPUART1, PA2,  PA3,  AF6;
+    LPUART1, PA14, PA13, AF6;
+    LPUART1, PC1,  PC0,  AF6;
+    LPUART1, PC4,  PC5,  AF2;
+    LPUART1, PC10, PC11, AF0;
+    LPUART1, PB10, PB11, AF4;
+    LPUART1, PB11, PB10, AF7;
+    LPUART1, PD8,  PD9,  AF0;
+
+    USART1,  PA9,  PA10, AF4;
+    USART1,  PB6,  PB7,  AF0;
+
+    USART2,  PA2,  PA3,  AF4;
+    USART2,  PA14, PA15, AF4;
+    USART2,  PD5,  PD6,  AF0;
 );
 
 #[cfg(any(feature = "stm32l0x2", feature = "stm32l0x3"))]
