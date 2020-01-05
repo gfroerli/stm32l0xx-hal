@@ -57,9 +57,7 @@ impl ExtiExt for EXTI {
         let port_bm = match port {
             gpio::Port::PA => 0,
             gpio::Port::PB => 1,
-            #[cfg(any(feature = "stm32l0x2", feature = "stm32l0x3"))]
             gpio::Port::PC => 2,
-            #[cfg(any(feature = "stm32l0x2", feature = "stm32l0x3"))]
             gpio::Port::PD => 3,
             #[cfg(any(feature = "stm32l0x2", feature = "stm32l0x3"))]
             gpio::Port::PE => 4,

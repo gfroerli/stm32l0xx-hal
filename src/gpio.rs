@@ -67,6 +67,8 @@ pub(crate) enum AltMode {
 pub enum Port {
     PA,
     PB,
+    PC,
+    PD,
 }
 
 #[cfg(any(feature = "stm32l0x2", feature = "stm32l0x3"))]
@@ -505,7 +507,6 @@ gpio!(GPIOB, gpiob, iopben, PB, [
     PB15: (pb15, 15, Input<Floating>),
 ]);
 
-#[cfg(any(feature = "stm32l0x2", feature = "stm32l0x3"))]
 gpio!(GPIOC, gpioc, iopcen, PC, [
     PC0: (pc0, 0, Input<Floating>),
     PC1: (pc1, 1, Input<Floating>),
@@ -525,7 +526,6 @@ gpio!(GPIOC, gpioc, iopcen, PC, [
     PC15: (pc15, 15, Input<Floating>),
 ]);
 
-#[cfg(any(feature = "stm32l0x2", feature = "stm32l0x3"))]
 gpio!(GPIOD, gpiod, iopden, PD, [
     PD0: (pd0, 0, Input<Floating>),
     PD1: (pd1, 1, Input<Floating>),
